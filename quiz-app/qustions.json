@@ -1,0 +1,75 @@
+{
+  "quizTitle": "Frontend Development Quiz",
+  "questions": [
+    {
+      "question": "What does HTML stand for?",
+      "options": [
+        "Hyper Text Markup Language",
+        "High Text Markup Language",
+        "Hyper Tabular Markup Language",
+        "Hyperlinks and Text Markup Language"
+      ],
+      "correctAnswer": "Hyper Text Markup Language"
+    },
+    {
+      "question": "Which language is used for styling web pages?",
+      "options": ["HTML", "JQuery", "CSS", "XML"],
+      "correctAnswer": "CSS"
+    },
+    {
+      "question": "Which JavaScript method is used to select an element by ID?",
+      "options": [
+        "getElementByClassName",
+        "getElementById",
+        "querySelector",
+        "selectElement"
+      ],
+      "correctAnswer": "getElementById"
+    },
+    {
+      "question": "What is the correct syntax for linking an external CSS file?",
+      "options": [
+        "<stylesheet>style.css</stylesheet>",
+        "<link rel='stylesheet' href='style.css'>",
+        "<style src='style.css'>",
+        "<css>style.css</css>"
+      ],
+      "correctAnswer": "<link rel='stylesheet' href='style.css'>"
+    },
+    {
+      "question": "Which HTML tag is used to create a hyperlink?",
+      "options": ["<link>", "<a>", "<href>", "<url>"],
+      "correctAnswer": "<a>"
+    },
+    {
+      "question": "Which property is used in CSS to change the text color?",
+      "options": ["text-color", "color", "font-color", "textStyle"],
+      "correctAnswer": "color"
+    },
+    {
+      "question": "How do you declare a JavaScript variable?",
+      "options": ["variable x;", "var x;", "x = variable;", "let = x;"],
+      "correctAnswer": "var x;"
+    },
+    {
+      "question": "Which function is used to print something in the console?",
+      "options": ["print()", "log()", "console.log()", "write()"],
+      "correctAnswer": "console.log()"
+    },
+    {
+      "question": "What is the default position value in CSS?",
+      "options": ["absolute", "relative", "fixed", "static"],
+      "correctAnswer": "static"
+    },
+    {
+      "question": "Which method can be used to round a number to the nearest integer in JavaScript?",
+      "options": [
+        "Math.round()",
+        "Math.ceil()",
+        "Math.floor()",
+        "Math.random()"
+      ],
+      "correctAnswer": "Math.round()"
+    }
+  ]
+}
