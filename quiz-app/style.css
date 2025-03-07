@@ -97,13 +97,14 @@ body {
   background-color: #5eab6d;
 }
 
-.quiz-app-container .quiz-app-footer .next {
+.quiz-app-container button.next {
   background-color: #5eab6d;
   outline: none;
   border: 1px solid #459e57;
   color: white;
   font-weight: bold;
   cursor: pointer;
+  width: 100%;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;

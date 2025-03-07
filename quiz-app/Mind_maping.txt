@@ -8,7 +8,7 @@
 08 - Set The Number For The Right and Wrong Answers
 09 - Create CountDown Timer
 10 - Fetch The Questions From JSON Object
-11 - Shw First Questions
+11 - Show First Questions
 12 - Check Answers and hide Questions and Show next one 
 13 - If the time end ==> Mark the Questions as Wrong and Show next Questions
 14 - Add Class One Bullet after Answering the Question

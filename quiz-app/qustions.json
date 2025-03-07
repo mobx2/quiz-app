@@ -27,19 +27,19 @@
       "correctAnswer": "getElementById"
     },
     {
-      "question": "What is the correct syntax for linking an external CSS file?",
+      "question": "What does CSS stand for?",
       "options": [
-        "<stylesheet>style.css</stylesheet>",
-        "<link rel='stylesheet' href='style.css'>",
-        "<style src='style.css'>",
-        "<css>style.css</css>"
+        "Creative Style Sheets",
+        "Cascading Style Sheets",
+        "Computer Style Sheets",
+        "Colorful Style Sheets"
       ],
-      "correctAnswer": "<link rel='stylesheet' href='style.css'>"
+      "correctAnswer": "Cascading Style Sheets"
     },
     {
-      "question": "Which HTML tag is used to create a hyperlink?",
-      "options": ["<link>", "<a>", "<href>", "<url>"],
-      "correctAnswer": "<a>"
+      "question": "Which language is used to style web pages?",
+      "options": ["HTML", "JavaScript", "CSS", "Python"],
+      "correctAnswer": "CSS"
     },
     {
       "question": "Which property is used in CSS to change the text color?",
