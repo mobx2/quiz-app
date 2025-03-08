@@ -1,10 +1,17 @@
-// let questionsNumber = document.querySelector(".number");
-let question = document.querySelector(".question");
-let quizAppContainer = document.querySelector(".quiz-app-container");
 let questionMain = document.querySelector(".question-main");
-let nextBTn = document.createElement("button");
+let quizApp = document.querySelector(".quiz-app-container");
+console.log(quizApp);
+
 let results = document.querySelector(".results");
+
+let timerDiv = document.createElement("div");
+timerDiv.classList.add("timer");
+timerDiv.innerHTML = 'Time left: <span id="countdown">10</span> seconds';
+questionMain.prepend(timerDiv);
+
+let nextBTn = document.createElement("button");
 nextBTn.classList.add("next");
+
 let questionsCount = document.createElement("div");
 questionsCount.classList.add("questions-count");
 
@@ -17,8 +24,6 @@ nextBTn.innerHTML = "Next Question";
 
 questionMain.appendChild(nextBTn);
 questionMain.appendChild(questionsCount);
-
-// console.log(question);
 
 let currentIndex = 0;
 let rightAnswers = 0;
@@ -37,31 +42,49 @@ function getQuestions() {
 
       createElements(questionsArray[currentIndex], qCount);
 
-      // console.log(questionsArray[currentIndex]);
+      startTimer();
 
       nextBTn.addEventListener("click", function handleClick() {
-        let theRight = questionsArray[currentIndex].correctAnswer;
+        let theRight = questionsArray[currentIndex]?.correctAnswer;
+
+        checkAnswer(theRight, qCount);
 
         currentIndex++;
-        checkAnswer(theRight, qCount);
-        // increase index
 
-        // Remove old question
-
-        questionMain.innerHTML = "";
-
-        createElements(questionsArray[currentIndex], qCount);
-
-        showBullets(currentIndex);
-
-        finalResult();
+        if (currentIndex < qCount) {
+          questionMain.innerHTML = "";
+          createElements(questionsArray[currentIndex], qCount);
+          showBullets(currentIndex);
+        } else {
+          finalResult(qCount);
+        }
       });
     }
   };
 
-  // questionsArray[currentIndex].question
   myReq.open("GET", "qustions.json", true);
   myReq.send();
+}
+
+let countdownElement;
+let timeLeft = 10;
+let interval;
+
+function startTimer() {
+  clearInterval(interval);
+
+  countdownElement = document.getElementById("countdown");
+  timeLeft = 10;
+
+  interval = setInterval(() => {
+    countdownElement.textContent = timeLeft;
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(interval);
+      nextBTn.click();
+    }
+  }, 1000);
 }
 
 getQuestions();
@@ -77,112 +100,87 @@ function showBullets(num) {
   }
 }
 
-function createElements(count, obj) {
-  // Create quiz title
+function createElements(c, obj) {
+  questionMain.innerHTML = "";
 
+  // Reset timer
+  clearInterval(interval);
+  timeLeft = 10;
+
+  // Create Timer
+  let timerDiv = document.createElement("div");
+  timerDiv.classList.add("timer");
+  timerDiv.innerHTML = 'Time left: <span id="countdown">10</span> seconds';
+
+  // Create quiz title
   let quizTitle = document.createElement("p");
   quizTitle.classList.add("quiz-title");
-
-  // Create Title
 
   let title = document.createElement("span");
   title.classList.add("title");
   title.innerHTML = "Frontend Development Quiz";
 
-  // append title to quizTitle
-
   quizTitle.appendChild(title);
-
-  // Create question number
 
   let questionsNumber = document.createElement("span");
   questionsNumber.classList.add("question-number");
   questionsNumber.innerHTML = "Question number: ";
 
-  // append question number to quiz title
-
   quizTitle.appendChild(questionsNumber);
-
-  // append title to quizTitle
 
   let number = document.createElement("span");
   number.classList.add("number");
-
-  // append number to question number
-
   questionsNumber.appendChild(number);
 
   // Create Question section
-
   let question = document.createElement("div");
-
   question.classList.add("question");
 
-  // create question name
-
   let questionName = document.createElement("p");
-
   questionName.classList.add("question-name");
-
-  questionName.innerHTML = count.question;
-  //
-
-  // append questionName to question
-
+  questionName.innerHTML = c.question;
   question.appendChild(questionName);
 
-  // create options
-
+  // Create options
   let options = document.createElement("ul");
   options.classList.add("options");
 
-  // create answers
-
   for (let i = 0; i < 4; i++) {
-    // create main answer div
-
     let answerDiv = document.createElement("div");
-
     answerDiv.classList.add("answer");
-
-    // create input radio
 
     let input = document.createElement("input");
     input.type = "radio";
     input.id = `answer_${i + 1}`;
     input.name = "question";
-    input.setAttribute(`data-answer`, count.options[i]);
+    input.setAttribute(`data-answer`, c.options[i]);
 
     if (i === 0) {
       input.checked = true;
     }
 
-    // create input label
-
     let label = document.createElement("label");
-
     label.setAttribute("for", `answer_${i + 1}`);
-
-    // count.options[i]
-    label.innerHTML = count.options[i];
-    // append answer to answer div
+    label.innerHTML = c.options[i];
 
     answerDiv.appendChild(input);
     answerDiv.appendChild(label);
 
-    // append answer div to question
     options.appendChild(answerDiv);
     question.appendChild(options);
   }
 
+  // Add elemnts to questionMain
+  questionMain.appendChild(timerDiv);
+  questionMain.appendChild(quizTitle);
+  questionMain.appendChild(question);
   questionMain.appendChild(nextBTn);
   questionMain.appendChild(questionsCount);
 
-  questionMain.prepend(question);
-  questionMain.prepend(quizTitle);
+  startTimer(); // Start timer for each question
 }
 
-function checkAnswer(rAnswer, count) {
+function checkAnswer(rAnswer, c) {
   let answers = document.getElementsByName("question");
 
   let theChosenAnswer;
@@ -203,22 +201,27 @@ function checkAnswer(rAnswer, count) {
   }
 }
 
-function finalResult(count) {
+function finalResult(c) {
   let theResult;
 
-  if (currentIndex === count) {
-    questionMain.remove();
+  if (currentIndex === c) {
+    // questionMain.remove();
 
-    console.log("55555555");
+    // console.log("ALOOOOOOOOOOOOOOOOOOOO");
 
-    if (rightAnswers > count / 2 && rightAnswers < count) {
+    if (rightAnswers > c / 2 && rightAnswers < c) {
       theResult = `<span class="good">Good ${rightAnswers} from ${count}</span>`;
-    } else if (rightAnswers === count) {
+    } else if (rightAnswers === c) {
       theResult = `<span class="perfect">Perfect</span> All answers is good `;
     } else {
-      theResult = `<span class="bad"> bad ${rightAnswers} from ${count}</span>`;
+      theResult = `<span class="bad"> bad ${rightAnswers} from ${c}</span>`;
     }
 
-    results.innerHTML = theResult;
+    questionMain.innerHTML = "";
+    let resultDiv = document.createElement("div");
+    resultDiv.classList.add("result");
+    resultDiv.innerHTML = theResult;
+
+    questionMain.appendChild(resultDiv);
   }
 }
